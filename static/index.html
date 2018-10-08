@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>KT status</title>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="/jquery.sparkline.min.js.gz"></script>
+  </head>
+  <body>
+    <h1>KT status</h1>
+    <h2>Current</h2>
+    <p>
+      <span id="current_status">&#x2b24;</span>
+      Response time: <span id="current_response_time"></span>ms
+    </p>
+    <h2>Last 24 hours</h2>
+    <div id="sparkline_24_hours"></div>
+    <h2>Last 91 days</h2>
+    <div id="sparkline_91_days"></div>
+    <script src="/main.js"></script>
+  </body>
+</html>
