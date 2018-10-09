@@ -10,4 +10,5 @@ fi
 
 . "$PARENT_DIR/virtualenv/bin/activate"
 
-python "$PARENT_DIR/calculate_stats.py" "$@"
+cd "$PARENT_DIR"
+python calculate_stats.py "$@"
