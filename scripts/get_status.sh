@@ -10,4 +10,4 @@ fi
 
 . "$PARENT_DIR/virtualenv/bin/activate"
 
-python get_status.py
+python "$PARENT_DIR/get_status.py"
