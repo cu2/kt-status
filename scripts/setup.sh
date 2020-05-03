@@ -1,5 +1,5 @@
-#!/bin/bash -e
-set -o pipefail
+#!/usr/bin/env bash
+set -euo pipefail
 
 PARENT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && cd .. && pwd )"
 
