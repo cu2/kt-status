@@ -11,7 +11,7 @@ const getSuccessRateSeriesData = function(data) {
   return data.map(function(item) {
     return [
       new Date(item.timestamp).getTime(),
-      Math.round(item.success_rate),
+      Math.round(item.success_rate * 100) / 100,
     ];
   });
 };
@@ -38,7 +38,23 @@ const getSuccessRateSeriesConfig = function(data) {
   }];
 };
 
-const getChartConfig = function(title, series) {
+const getResponseTimeYAxisConfig = {
+  min: 0,
+  max: 1500,
+  title: {
+    text: null,
+  },
+};
+
+const getSuccessRateYAxisConfig = {
+  min: 95,
+  max: 100,
+  title: {
+    text: null,
+  },
+};
+
+const getChartConfig = function(title, series, yAxis) {
   return {
     chart: {
       type: "line",
@@ -60,22 +76,18 @@ const getChartConfig = function(title, series) {
     xAxis: {
       type: "datetime",
     },
-    yAxis: {
-      min: 0,
-      title: {
-        text: null,
-      },
-    },
+    yAxis: yAxis,
     series: series,
   };
 };
 
-const createChart = function(renderTo, title, seriesConfig) {
+const createChart = function(renderTo, title, seriesConfig, yAxisConfig) {
   Highcharts.chart(
     renderTo,
     getChartConfig(
       title,
       seriesConfig,
+      yAxisConfig,
     ),
   );
 };
@@ -132,11 +144,13 @@ $(function() {
       "response_time_chart_24_hours",
       "Response times in last 24 hours",
       getResponseTimeSeriesConfig(data),
+      getResponseTimeYAxisConfig,
     );
     createChart(
       "success_rate_chart_24_hours",
       "Success rates in last 24 hours",
       getSuccessRateSeriesConfig(data),
+      getSuccessRateYAxisConfig,
     );
     const lastHour = data[data.length - 1];
     $("#last_hour_response_time_p95").html(Math.round(lastHour.p95 * 1000));
@@ -151,11 +165,13 @@ $(function() {
       "response_time_chart_91_days",
       "Response times in last 91 days",
       getResponseTimeSeriesConfig(data),
+      getResponseTimeYAxisConfig,
     );
     createChart(
       "success_rate_chart_91_days",
       "Success rates in last 91 days",
       getSuccessRateSeriesConfig(data),
+      getSuccessRateYAxisConfig,
     );
     const lastDay = data[data.length - 1];
     $("#last_day_response_time_p95").html(Math.round(lastDay.p95 * 1000));
