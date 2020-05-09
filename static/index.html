@@ -7,33 +7,52 @@
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script src="https://code.highcharts.com/highcharts.js"></script>
     <link rel="icon" type="image/vnd.microsoft.icon" href="/favicon.ico">
+    <link rel="stylesheet" href="style.css">
   </head>
   <body>
     <h1>KT status</h1>
-    <h2>Current</h2>
-    <p>Status: <span id="current_status">?</span></p>
-    <p>Response time: <span id="current_response_time">?</span>ms</p>
-    <p>Datetime: <span id="current_datetime">?</span></p>
-    <h2>Last hour</h2>
-    <p>Response times:</p>
-    <ul>
-      <li>p95: <span id="last_hour_response_time_p95">?</span>ms</li>
-      <li>p90: <span id="last_hour_response_time_p90">?</span>ms</li>
-      <li>p50: <span id="last_hour_response_time_p50">?</span>ms</li>
-      <li>avg: <span id="last_hour_response_time_avg">?</span>ms</li>
-    </ul>
-    <p>Success rate: <span id="last_hour_success_rate">?</span>%</p>
-    <p>Datetime: <span id="last_hour_datetime">?</span></p>
-    <h2>Last day</h2>
-    <p>Response times:</p>
-    <ul>
-      <li>p95: <span id="last_day_response_time_p95">?</span>ms</li>
-      <li>p90: <span id="last_day_response_time_p90">?</span>ms</li>
-      <li>p50: <span id="last_day_response_time_p50">?</span>ms</li>
-      <li>avg: <span id="last_day_response_time_avg">?</span>ms</li>
-    </ul>
-    <p>Success rate: <span id="last_day_success_rate">?</span>%</p>
-    <p>Datetime: <span id="last_day_datetime">?</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th rowspan="2"></th>
+          <th rowspan="2">Status</th>
+          <th colspan="4">Response time [ms]</th>
+          <th rowspan="2">Datetime</th>
+        </tr>
+        <tr>
+          <th>p50</th>
+          <th>p90</th>
+          <th>p95</th>
+          <th>avg</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th>Current</th>
+          <td><span id="current_status">?</span></td>
+          <td colspan="4" class="center"><span id="current_response_time">?</span></td>
+          <td class="left"><span id="current_datetime">?</span></td>
+        </tr>
+        <tr>
+          <th>Last hour</th>
+          <td><span id="last_hour_success_rate">?</span>%</td>
+          <td><span id="last_hour_response_time_p50"></span></td>
+          <td><span id="last_hour_response_time_p90"></span></td>
+          <td><span id="last_hour_response_time_p95"></span></td>
+          <td><span id="last_hour_response_time_avg"></span></td>
+          <td class="left"><span id="last_hour_datetime">?</span></td>
+        </tr>
+        <tr>
+          <th>Last day</th>
+          <td><span id="last_day_success_rate">?</span>%</td>
+          <td><span id="last_day_response_time_p50"></span></td>
+          <td><span id="last_day_response_time_p90"></span></td>
+          <td><span id="last_day_response_time_p95"></span></td>
+          <td><span id="last_day_response_time_avg"></span></td>
+          <td class="left"><span id="last_day_datetime">?</span></td>
+        </tr>
+      </tbody>
+    </table>
     <h2>Response time history</h2>
     <div id="response_time_chart_24_hours"></div>
     <div id="response_time_chart_91_days"></div>

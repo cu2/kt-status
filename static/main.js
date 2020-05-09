@@ -1,3 +1,8 @@
+const formatSuccessRate = function(rate) {
+  return Math.round(rate * 100) / 100;
+}
+
+
 const getResponseTimeSeriesData = function(data, name) {
   return data.map(function(item) {
     return [
@@ -11,7 +16,7 @@ const getSuccessRateSeriesData = function(data) {
   return data.map(function(item) {
     return [
       new Date(item.timestamp).getTime(),
-      Math.round(item.success_rate * 100) / 100,
+      formatSuccessRate(item.success_rate),
     ];
   });
 };
@@ -157,7 +162,7 @@ $(function() {
     $("#last_hour_response_time_p90").html(Math.round(lastHour.p90 * 1000));
     $("#last_hour_response_time_p50").html(Math.round(lastHour.p50 * 1000));
     $("#last_hour_response_time_avg").html(Math.round(lastHour.avg * 1000));
-    $("#last_hour_success_rate").html(lastHour.success_rate);
+    $("#last_hour_success_rate").html(formatSuccessRate(lastHour.success_rate));
     $("#last_hour_datetime").html(getDateHour(lastHour.timestamp));
   });
   $.getJSON("/data/days.json?t="+t, function(data) {
@@ -178,7 +183,7 @@ $(function() {
     $("#last_day_response_time_p90").html(Math.round(lastDay.p90 * 1000));
     $("#last_day_response_time_p50").html(Math.round(lastDay.p50 * 1000));
     $("#last_day_response_time_avg").html(Math.round(lastDay.avg * 1000));
-    $("#last_day_success_rate").html(lastDay.success_rate);
+    $("#last_day_success_rate").html(formatSuccessRate(lastDay.success_rate));
     $("#last_day_datetime").html(getDate(lastDay.timestamp));
   });
 });
