@@ -194,4 +194,12 @@ $(function() {
     $("#last_7_days_success_rate").html(formatSuccessRate(data.success_rate));
     $("#last_7_days_datetime").html(data.time_interval);
   });
+  $.getJSON("/data/last_28_days.json?t="+t, function(data) {
+    $("#last_28_days_response_time_p95").html(Math.round(data.p95 * 1000));
+    $("#last_28_days_response_time_p90").html(Math.round(data.p90 * 1000));
+    $("#last_28_days_response_time_p50").html(Math.round(data.p50 * 1000));
+    $("#last_28_days_response_time_avg").html(Math.round(data.avg * 1000));
+    $("#last_28_days_success_rate").html(formatSuccessRate(data.success_rate));
+    $("#last_28_days_datetime").html(data.time_interval);
+  });
 });

@@ -153,15 +153,14 @@ def store_stats_for_last_91_days(T):
         json.dump(data[-91:], f, sort_keys=True, indent=4)
 
 
-def store_stats_for_last_7_days(T):
-    day_count = 7
+def store_stats_for_last_N_days(T, day_count):
     success_list, response_time_list = get_data_for_days(T, day_count)
     if len(success_list) == 0:
         return
     success_rate, avg, p50, p90, p95 = get_all_stats(success_list, response_time_list)
     T_d_first = (T - datetime.timedelta(days=day_count - 1)).strftime(r'%Y-%m-%d')
     T_d_last = T.strftime(r'%Y-%m-%d')
-    with open('static/data/last_7_days.json', 'w') as f:
+    with open('static/data/last_{}_days.json'.format(day_count), 'w') as f:
         json.dump({
             'time_interval': '{} - {}'.format(T_d_first, T_d_last),
             'success_rate': success_rate,
@@ -177,7 +176,8 @@ def main():
         T_last_day = datetime.datetime.utcnow() - datetime.timedelta(days=1)
         store_stats_for_day(T_last_day)
         store_stats_for_last_91_days(T_last_day)
-        store_stats_for_last_7_days(T_last_day)
+        store_stats_for_last_N_days(T_last_day, 7)
+        store_stats_for_last_N_days(T_last_day, 28)
     else:
         T_last_hour = datetime.datetime.utcnow() - datetime.timedelta(hours=1)
         store_stats_for_hour(T_last_hour)
